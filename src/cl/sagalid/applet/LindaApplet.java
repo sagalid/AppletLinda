@@ -7,6 +7,7 @@ package cl.sagalid.applet;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import netscape.javascript.*;
 
 /**
  *
@@ -39,13 +40,14 @@ public class LindaApplet extends javax.swing.JApplet {
             java.util.logging.Logger.getLogger(LindaApplet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        JSObject window = JSObject.getWindow(this);
+        setRutasParaFirmar((String) window.eval("obtieneRutas()"));
         /* Create and display the applet */
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
                     initComponents();
-                    }
+                }
             });
         } catch (InterruptedException | InvocationTargetException ex) {
             System.err.println("Error en la carga del Applet de firma " + ex.getMessage());
@@ -135,28 +137,35 @@ public class LindaApplet extends javax.swing.JApplet {
 
 
         /*Proceso de obtención de rutas*/
-        
+
 
 
         /*Proceso de firma electrónica*/
         AyudanteDeFirma ayudanteDeFirma = new AyudanteDeFirma();
         ayudanteDeFirma.pasoUno_cargaEtoken(new String(jPasswordField2.getPassword()));
         if (ayudanteDeFirma.accesoEtokenLogrado) {
-            System.out.println("Archivos a firmar " + getParameter("archivosParaFirmar"));
-            ayudanteDeFirma.pasoDos_obtieneRutasParaFirmar(getParameter("archivosParaFirmar"));
+            //System.out.println("Archivos a firmar " + getParameter("archivosParaFirmar"));
+            System.out.println("Archivos a firmar " + getRutasParaFirmar());
+            ayudanteDeFirma.pasoDos_obtieneRutasParaFirmar(getRutasParaFirmar());
             if (ayudanteDeFirma.getCantidadPdfParaFirma() > 0) {
+                System.out.println("Cantidad de PDF's a firmar: " + ayudanteDeFirma.getCantidadPdfParaFirma());
                 resultadoFirmaPdf = ayudanteDeFirma.pasoTres_firmaPdf();
             }
             if (ayudanteDeFirma.getCantidadXmlParaFirma() > 0) {
+                System.out.println("Cantidad de XML's a firmar: " + ayudanteDeFirma.getCantidadXmlParaFirma());
                 resultadoFirmaXml = ayudanteDeFirma.pasoCuatro_firmaXml();
             }
-            ayudanteDeFirma.pasoCinco_validaFirma();
-
+            if (ayudanteDeFirma.getCantidadPdfParaFirma() > 0 || ayudanteDeFirma.getCantidadXmlParaFirma() > 0) {
+                ayudanteDeFirma.pasoCinco_validaFirma();
+            }
             if (resultadoFirmaPdf) {
                 jLabel1.setText("Firma PDF realizada correctamente!");
             }
             if (resultadoFirmaXml) {
                 jLabel1.setText("Firma XML realizada correctamente!");
+            }
+            if(resultadoFirmaPdf && resultadoFirmaXml){
+                jLabel1.setText("No se logró firmar el archivo!");
             }
         } else {
             System.err.println("Error al tratar de acceder al EToken");
@@ -164,7 +173,6 @@ public class LindaApplet extends javax.swing.JApplet {
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
