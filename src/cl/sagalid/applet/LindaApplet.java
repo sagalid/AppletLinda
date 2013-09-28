@@ -7,7 +7,6 @@ package cl.sagalid.applet;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import netscape.javascript.*;
 
 /**
  *
@@ -40,8 +39,12 @@ public class LindaApplet extends javax.swing.JApplet {
             java.util.logging.Logger.getLogger(LindaApplet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        JSObject window = JSObject.getWindow(this);
-        setRutasParaFirmar((String) window.eval("obtieneRutas()"));
+        
+        /*Proceso de obtención de rutas*/ 
+        String rutasDelCliente = getParameter("rutaArchivosParaFirmar");
+        System.out.println("rutas a firmar en applet de firma: "+rutasDelCliente);
+        setRutasParaFirmar(rutasDelCliente);
+
         /* Create and display the applet */
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
@@ -134,11 +137,6 @@ public class LindaApplet extends javax.swing.JApplet {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         boolean resultadoFirmaPdf = false;
         boolean resultadoFirmaXml = false;
-
-
-        /*Proceso de obtención de rutas*/
-
-
 
         /*Proceso de firma electrónica*/
         AyudanteDeFirma ayudanteDeFirma = new AyudanteDeFirma();
