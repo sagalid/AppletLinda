@@ -45,7 +45,7 @@ public class AyudanteDeFirma {
     public void pasoDos_obtieneRutasParaFirmar(String rutasSeparadasPorComa){
             setRutasParaFirmar(rutasSeparadasPorComa);
             //setRutasParaFirmar("C:\\Users\\asalasf\\Desktop\\test.pdf,C:\\Users\\asalasf\\Desktop\\test2.pdf");
-            setArregloRutasParaFirmar(rutasParaFirmar.split(","));
+            setArregloRutasParaFirmar(rutasParaFirmar.split(";"));
             for (int i = 0; i < arregloRutasParaFirmar.length; i++) {
                 if (arregloRutasParaFirmar[i].endsWith(".pdf")) {
                     listaRutasParaFirmarPDF.add(arregloRutasParaFirmar[i]);

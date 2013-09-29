@@ -215,6 +215,8 @@ public class DNDApplet extends Applet implements DropTargetListener, ActionListe
                     rutasParaFirma = rutasParaFirma.replaceAll("\\\\", "\\\\\\\\");
                     System.out.println("Rutas para firmar: " + rutasParaFirma);
                     Object eval = window.eval("cargaRutas(" + rutasParaFirma + ")");
+                    eval = window.eval("ejecutaAppletLinda();");
+                    
                     
                 }
             } else {
