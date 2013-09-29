@@ -8,6 +8,7 @@ import cl.sagalid.linda.etoken.AccesoAlDispositivo;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -67,7 +68,7 @@ public class AyudanteDeFirma {
             while (iteradorPdf.hasNext()) {
                 rutaTempPdf = iteradorPdf.next().toString();
                 System.out.println("Firmando el archivo: " + rutaTempPdf);
-                resultadoFirmaPdf = objetoFirmaPDF.firmar(rutaTempPdf, rutaTempPdf + "_firmado.pdf", "Certificación", "Chile", accesoAlToken.getLlavePrivada(), accesoAlToken.getProveedor(), accesoAlToken.getChain());
+                resultadoFirmaPdf = objetoFirmaPDF.firmar(rutaTempPdf, FilenameUtils.removeExtension(rutaTempPdf) + "_firmado.pdf", "Certificación", "Chile", accesoAlToken.getLlavePrivada(), accesoAlToken.getProveedor(), accesoAlToken.getChain());
             }
             return resultadoFirmaPdf;
     }
