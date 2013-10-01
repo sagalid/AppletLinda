@@ -46,6 +46,7 @@ public class AyudanteDeFirma {
     public void pasoDos_obtieneRutasParaFirmar(String rutasSeparadasPorComa){
             setRutasParaFirmar(rutasSeparadasPorComa);
             //setRutasParaFirmar("C:\\Users\\asalasf\\Desktop\\test.pdf,C:\\Users\\asalasf\\Desktop\\test2.pdf");
+            //setRutasParaFirmar("C:\\Users\\asalasf\\Desktop\\ejemplo.xml");
             setArregloRutasParaFirmar(rutasParaFirmar.split(";"));
             for (int i = 0; i < arregloRutasParaFirmar.length; i++) {
                 if (arregloRutasParaFirmar[i].endsWith(".pdf")) {
@@ -81,7 +82,7 @@ public class AyudanteDeFirma {
             while (iteradorXml.hasNext()) {
                 rutaTempXml = iteradorXml.next().toString();
                 System.out.println("Firmando el archivo: " + rutaTempXml);
-                resultadoFirmaXml = objetoFirmaXML.firmar(rutaTempXml, rutaTempXml + "_firmado.xml", accesoAlToken.getLlavePrivada(), accesoAlToken.getProveedor(), accesoAlToken.getChain(), accesoAlToken.getLlavePublica());
+                resultadoFirmaXml = objetoFirmaXML.firmar(rutaTempXml, FilenameUtils.removeExtension(rutaTempXml) + "_firmado.xml", accesoAlToken.getLlavePrivada(), accesoAlToken.getProveedor(), accesoAlToken.getChain(), accesoAlToken.getLlavePublica());
             }
             return resultadoFirmaXml;
     }

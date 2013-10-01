@@ -53,7 +53,7 @@ public class firmaDocumento {
         boolean resultado = false;
         try {
 
-            File fXmlFile = new File("C:\\Users\\asalasf\\Desktop\\test.xml");
+            File fXmlFile = new File(rutaAlXml);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(fXmlFile);
@@ -70,30 +70,30 @@ public class firmaDocumento {
             resultado = true;
 
             OutputStream os;
-            os = new FileOutputStream("C:\\Users\\asalasf\\Desktop\\test_firmado.xml");
+            os = new FileOutputStream(rutaAlXmlFirmado);
            
             TransformerFactory tf = TransformerFactory.newInstance();
             javax.xml.transform.Transformer trans = tf.newTransformer();
             trans.transform(new DOMSource(doc), new StreamResult(os));
 
         } catch (TransformerException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("No se logró trasnformar "+ex.getMessage());
         }  catch (MarshalException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en marshal "+ex.getMessage());
         } catch (XMLSignatureException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en la firma de XML "+ex.getMessage());
         } catch (KeyException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en la llave "+ex.getMessage());
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error no existe este algoritmo "+ex.getMessage());
         } catch (InvalidAlgorithmParameterException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error parametro de algoritmo "+ex.getMessage());
         } catch (SAXException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en SAX "+ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en la lecto escritura de un archivo "+ex.getMessage());
         } catch (ParserConfigurationException ex) {
-            Logger.getLogger(firmaDocumento.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error en parser "+ex.getMessage());
         }
         return resultado;
     }

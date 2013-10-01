@@ -41,6 +41,7 @@ public class LindaApplet extends javax.swing.JApplet {
         //</editor-fold>
         
         /*Proceso de obtención de rutas*/ 
+        System.out.println("Init: applet de firma electrónica avanzada");
         String rutasDelCliente = getParameter("rutaArchivosParaFirmar");
         System.out.println("rutas a firmar en applet de firma: "+rutasDelCliente);
         setRutasParaFirmar(rutasDelCliente);
