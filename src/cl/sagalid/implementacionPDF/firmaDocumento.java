@@ -13,7 +13,6 @@ import com.itextpdf.text.pdf.security.ExternalDigest;
 import com.itextpdf.text.pdf.security.ExternalSignature;
 import com.itextpdf.text.pdf.security.MakeSignature;
 import com.itextpdf.text.pdf.security.PrivateKeySignature;
-import java.awt.Image;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -39,7 +38,7 @@ public class firmaDocumento {
             
             reader = new PdfReader(rutaAlPdf);
             os = new FileOutputStream(rutaAlPdfFirmado);
-            stamper = PdfStamper.createSignature(reader, os, '\0');
+            stamper = PdfStamper.createSignature(reader, os, '\0',null,true);
             
             
             appearance = stamper.getSignatureAppearance();

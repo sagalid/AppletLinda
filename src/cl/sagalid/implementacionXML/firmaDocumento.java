@@ -16,8 +16,6 @@ import java.security.Provider;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.CanonicalizationMethod;
 import javax.xml.crypto.dsig.DigestMethod;
