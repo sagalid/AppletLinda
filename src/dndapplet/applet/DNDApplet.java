@@ -19,22 +19,22 @@ package dndapplet.applet;
 
 import java.applet.*;
 
-import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Container;
-import java.awt.Color;
-import java.awt.event.*;
-import java.awt.dnd.*;
 import java.awt.datatransfer.*;
-import java.util.List;
-import java.util.ArrayList;
+import java.awt.dnd.*;
+import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.zip.*;
+import javax.swing.*;
+import javax.swing.border.*;
 import netscape.javascript.JSObject;
 
 /**
@@ -210,6 +210,7 @@ public class DNDApplet extends Applet implements DropTargetListener, ActionListe
 
                 /*Proceso de obtención de rutas*/
                 if (m_fileList.size() > 0) {
+                    
                     JSObject window = JSObject.getWindow(this);
                     String rutasParaFirma = "\"" + strRutaArchivosParaFirma + "\"";
                     rutasParaFirma = rutasParaFirma.replaceAll("\\\\", "\\\\\\\\");
@@ -219,7 +220,7 @@ public class DNDApplet extends Applet implements DropTargetListener, ActionListe
                     
                     
                 }
-            } else {
+            } else {    
                 /*
                  * There is a very large number of other data flavors the user can 
                  * drop onto our applet.  we will just show the information from 
