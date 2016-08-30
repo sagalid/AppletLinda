@@ -46,7 +46,7 @@ public class java {
      public void PruebaDeFirmaPDF() {
      
          AyudanteDeFirma ayudante = new AyudanteDeFirma();
-         ayudante.pasoUno_cargaEtoken("Agustin2010");
+         ayudante.pasoUno_cargaEtoken("ClaveDelToken");
          ayudante.pasoDos_obtieneRutasParaFirmar("C:\\Users\\Agustín\\Desktop\\test.pdf");
          ayudante.pasoTres_firmaPdf();
          //ayudante.pasoCuatro_firmaXml();
